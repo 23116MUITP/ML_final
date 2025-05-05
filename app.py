@@ -23,13 +23,13 @@ if uploaded_file:
     # Filter data based on selected hashtag
     trend_df = prepare_trend_data(df, "timestamp", "hashtags", granularity, [selected_hashtag])
 
-if trend_df.empty:
-    st.warning(f"No data found for #{selected_hashtag} with the selected granularity.")
-else:
-    st.subheader(f"📈 Frequency Over Time for #{selected_hashtag}")
-    st.altair_chart(plot_trend_chart(trend_df, interactive=True), use_container_width=True)
-
-    st.subheader("🏆 Top Hashtags Overall")
-    st.altair_chart(plot_top_topics(df), use_container_width=True)
+    if trend_df.empty:
+        st.warning(f"No data found for #{selected_hashtag} with the selected granularity.")
+    else:
+        st.subheader(f"📈 Frequency Over Time for #{selected_hashtag}")
+        st.altair_chart(plot_trend_chart(trend_df, interactive=True), use_container_width=True)
+    
+        st.subheader("🏆 Top Hashtags Overall")
+        st.altair_chart(plot_top_topics(df), use_container_width=True)
 else:
     st.warning("Upload a CSV file to begin.")

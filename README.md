@@ -11,6 +11,8 @@ This Streamlit app analyzes social media content trends over time.
 
 ## 🧪 Run Locally
 ```bash
+python -m venv venv
+venv\Scripts\activate
 pip install -r requirements.txt
 streamlit run app.py
 ```

@@ -21,8 +21,11 @@ if uploaded_file:
     selected_hashtag = st.sidebar.selectbox("Select a Hashtag to View", options=all_tags)
 
     # Filter data based on selected hashtag
-    trend_df = prepare_trend_data(df, "timestamp", "hashtags", granularity, [selected_hashtag])
+trend_df = prepare_trend_data(df, "timestamp", "hashtags", granularity, [selected_hashtag])
 
+if trend_df.empty:
+    st.warning(f"No data found for #{selected_hashtag} with the selected granularity.")
+else:
     st.subheader(f"📈 Frequency Over Time for #{selected_hashtag}")
     st.altair_chart(plot_trend_chart(trend_df, interactive=True), use_container_width=True)
 
